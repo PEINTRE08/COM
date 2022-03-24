@@ -1,0 +1,26 @@
+HKCR
+{
+	UpdateVersionInfo.COM.1 = s 'UpdateVersionInfo Class'
+	{
+		CLSID = s '{1DBB2F65-B179-4D2E-9DB8-BE2786923D3F}'
+	}
+	UpdateVersionInfo.COM = s 'UpdateVersionInfo Class'
+	{		
+		CurVer = s 'UpdateVersionInfo.COM.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {1DBB2F65-B179-4D2E-9DB8-BE2786923D3F} = s 'UpdateVersionInfo Class'
+		{
+			ProgID = s 'UpdateVersionInfo.COM.1'
+			VersionIndependentProgID = s 'UpdateVersionInfo.COM'
+			ForceRemove Programmable
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			TypeLib = s '{17734503-A497-4943-90DE-5A1E140CBB5E}'
+			Version = s '1.0'
+		}
+	}
+}

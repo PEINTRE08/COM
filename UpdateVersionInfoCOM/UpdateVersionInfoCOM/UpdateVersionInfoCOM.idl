@@ -1,0 +1,60 @@
+// UpdateVersionInfoCOM.idl : UpdateVersionInfoCOM的 IDL 源
+//
+
+// 此文件将由 MIDL 工具处理以
+// 产生类型库(UpdateVersionInfoCOM.tlb)和封送处理代码。
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	object,
+	uuid(a817e7a2-43fa-11d0-9e44-00aa00b6770a),
+	dual,	
+	pointer_default(unique)
+]
+interface IComponentRegistrar : IDispatch
+{
+	[id(1)]	HRESULT Attach([in] BSTR bstrPath);
+	[id(2)]	HRESULT RegisterAll();
+	[id(3)]	HRESULT UnregisterAll();
+	[id(4)]	HRESULT GetComponents([out] SAFEARRAY(BSTR)* pbstrCLSIDs, [out] SAFEARRAY(BSTR)* pbstrDescriptions);
+	[id(5)]	HRESULT RegisterComponent([in] BSTR bstrCLSID);
+	[id(6)] HRESULT UnregisterComponent([in] BSTR bstrCLSID);
+};
+
+[
+	object,
+	uuid(91393309-4B85-464E-B075-D226FFDC6C51),
+	dual,
+	nonextensible,
+	pointer_default(unique)
+]
+interface IUpdateVersionInfo : IDispatch{
+	[id(1)] HRESULT UpdatePEInfo([in] BSTR lpFile, [in] BSTR lpKey, [out] BSTR* lppValue, [out, retval] LONG* lppResult);
+	[id(2)] HRESULT UpdatePEVersion([in] BSTR lpFile, [in] BSTR lpKey, [in] BSTR lpValue, [out, retval] LONG* lppResult);
+};
+[
+	uuid(17734503-A497-4943-90DE-5A1E140CBB5E),
+	version(1.0),
+	custom(a817e7a1-43fa-11d0-9e44-00aa00b6770a,"{43C438BF-EC9C-4409-858C-C05B1D618E17}")
+]
+library UpdateVersionInfoCOMLib
+{
+	importlib("stdole2.tlb");
+	[
+		uuid(43C438BF-EC9C-4409-858C-C05B1D618E17)		
+	]
+	coclass CompReg
+	{
+		[default] interface IComponentRegistrar;
+	};
+	[
+		uuid(1DBB2F65-B179-4D2E-9DB8-BE2786923D3F)		
+	]
+	coclass UpdateVersionInfo
+	{
+		[default] interface IUpdateVersionInfo;
+	};
+};
+
